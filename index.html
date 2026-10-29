@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InvoiceKit — Free Online Invoice Generator | Create & Download PDF Invoice</title>
+  <meta name="description" content="Free online invoice generator. Create professional invoices in seconds, add items, tax and notes, then download as PDF. No signup required. Works in your browser.">
+  <link rel="canonical" href="https://invoicekit.in/">
+  <meta property="og:title" content="InvoiceKit — Free Invoice Generator">
+  <meta property="og:description" content="Create professional invoices instantly. Add items, tax, notes. Download as PDF. Free, no signup.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://invoicekit.in/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="InvoiceKit — Free Invoice Generator">
+  <meta name="twitter:description" content="Create professional PDF invoices in seconds. Free, no signup, no data stored.">
+  <meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="css/main.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"InvoiceKit","url":"https://invoicekit.in/","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"Free online invoice generator. Create professional PDF invoices instantly, no signup needed.","featureList":["PDF invoice generation","Tax calculation","Line item management","Browser-based — no data stored"]}
+  </script>
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.7.1/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Invoice<span>Kit</span></a>
+  <span class="nav-tag">Free</span>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Create a Professional Invoice</h1>
+    <p>Fill in the details below and download your invoice as a PDF. No signup. No data stored on any server.</p>
+  </div>
+
+  <!-- BUSINESS INFO -->
+  <div class="section">
+    <div class="section-title">Your Business</div>
+    <div class="two-col">
+      <div class="field"><label>Business / Your Name *</label><input type="text" id="biz_name" placeholder="Pradeep Consulting" oninput="syncPreview()"></div>
+      <div class="field"><label>Email</label><input type="email" id="biz_email" placeholder="you@yourcompany.com" oninput="syncPreview()"></div>
+    </div>
+    <div class="two-col">
+      <div class="field"><label>Phone</label><input type="text" id="biz_phone" placeholder="+91 9876543210" oninput="syncPreview()"></div>
+      <div class="field"><label>GSTIN (optional)</label><input type="text" id="biz_gstin" placeholder="22AAAAA0000A1Z5" oninput="syncPreview()"></div>
+    </div>
+    <div class="field"><label>Address</label><textarea id="biz_address" placeholder="123, MG Road, Bengaluru, Karnataka 560001" oninput="syncPreview()"></textarea></div>
+  </div>
+
+  <!-- CLIENT INFO -->
+  <div class="section">
+    <div class="section-title">Bill To (Client)</div>
+    <div class="two-col">
+      <div class="field"><label>Client Name *</label><input type="text" id="client_name" placeholder="Acme Corp" oninput="syncPreview()"></div>
+      <div class="field"><label>Client Email</label><input type="email" id="client_email" placeholder="billing@acme.com" oninput="syncPreview()"></div>
+    </div>
+    <div class="field"><label>Client Address</label><textarea id="client_address" placeholder="456, Park Street, Mumbai, Maharashtra 400001" oninput="syncPreview()"></textarea></div>
+    <div class="field"><label>Client GSTIN (optional)</label><input type="text" id="client_gstin" placeholder="27BBBBB1111B1Z6" oninput="syncPreview()"></div>
+  </div>
+
+  <!-- INVOICE DETAILS -->
+  <div class="section">
+    <div class="section-title">Invoice Details</div>
+    <div class="two-col">
+      <div class="field"><label>Invoice Number *</label><input type="text" id="inv_number" placeholder="INV-001" oninput="syncPreview()"></div>
+      <div class="field"><label>Invoice Date *</label><input type="date" id="inv_date" oninput="syncPreview()"></div>
+    </div>
+    <div class="two-col">
+      <div class="field"><label>Due Date</label><input type="date" id="due_date" oninput="syncPreview()"></div>
+      <div class="field"><label>Currency</label>
+        <select id="currency" onchange="syncPreview()">
+          <option value="₹">₹ INR — Indian Rupee</option>
+          <option value="$">$ USD — US Dollar</option>
+          <option value="€">€ EUR — Euro</option>
+          <option value="£">£ GBP — British Pound</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINE ITEMS -->
+  <div class="section">
+    <div class="section-title">Items / Services</div>
+    <div class="items-header">
+      <span>Description</span><span>Qty</span><span>Rate</span><span>Amount</span><span></span>
+    </div>
+    <div id="items-list"></div>
+    <button class="add-item-btn" onclick="addItem()">+ Add Item</button>
+    <div class="totals">
+      <div class="total-row"><span>Subtotal</span><span id="t_subtotal">—</span></div>
+      <div class="total-row">
+        <span>Tax / GST (<input type="number" id="tax_pct" value="18" min="0" max="100" style="width:40px;padding:2px 4px;border:1px solid var(--border);border-radius:4px;font-size:13px" oninput="calcTotals()">%)</span>
+        <span id="t_tax">—</span>
+      </div>
+      <div class="total-row"><span>Discount (<input type="number" id="discount" value="0" min="0" style="width:50px;padding:2px 4px;border:1px solid var(--border);border-radius:4px;font-size:13px" oninput="calcTotals()"> flat)</span><span id="t_discount">—</span></div>
+      <div class="total-row grand"><span>Total</span><span id="t_total">—</span></div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="section">
+    <div class="section-title">Notes & Payment Terms</div>
+    <div class="field"><textarea id="notes" rows="3" placeholder="Payment due within 30 days. Bank: HDFC Bank, A/C: 1234567890, IFSC: HDFC0001234" oninput="syncPreview()"></textarea></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="downloadPDF()">⬇ Download PDF</button>
+    <button class="btn btn-secondary" onclick="showPreview()">👁 Preview Invoice</button>
+    <button class="btn btn-secondary" onclick="clearAll()">🗑 Clear</button>
+  </div>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="modal-overlay hidden" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Invoice Preview</h2>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="invoice-preview" id="preview-content"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+      <button class="btn btn-primary" onclick="downloadPDF()">⬇ Download PDF</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 InvoiceKit — Free invoice generator. No data is stored on any server. Your invoice stays in your browser.</p>
+</footer>
+
+<script src="js/invoice.js"></script>
+<script>
+  // Set today's date on load
+  document.getElementById('inv_date').value = new Date().toISOString().slice(0,10);
+  const due = new Date(); due.setDate(due.getDate() + 30);
+  document.getElementById('due_date').value = due.toISOString().slice(0,10);
+  document.getElementById('inv_number').value = 'INV-001';
+  addItem(); addItem();
+</script>
+</body>
+</html>
