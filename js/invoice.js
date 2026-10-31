@@ -197,6 +197,19 @@ function buildPreviewHTML(d) {
   `;
 }
 
+function shareWhatsApp() {
+  const d = getData();
+  const lines = d.items.filter(i => i.desc).map(i =>
+    `  • ${i.desc} ×${i.qty} @ ${d.cur}${i.rate.toFixed(2)} = ${d.cur}${(i.qty*i.rate).toFixed(2)}`
+  ).join('\n');
+  const text = `🧾 *Invoice ${d.inv.number || ''}*\nFrom: *${d.biz.name || 'Your Business'}*\nTo: ${d.client.name || ''}\nDate: ${d.inv.date || ''}\n\n${lines}\n\n` +
+    (d.discount > 0 ? `Discount: −${d.cur}${d.discount.toFixed(2)}\n` : '') +
+    (d.tax > 0 ? `Tax (${d.taxPct}%): ${d.cur}${d.tax.toFixed(2)}\n` : '') +
+    `*Total: ${d.cur}${d.total.toFixed(2)}*` +
+    (d.inv.notes ? `\n\n${d.inv.notes}` : '');
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
 function downloadPDF() {
   const d = getData();
   if (!d.biz.name || !d.client.name) { alert('Please enter your business name and client name.'); return; }
