@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Create a GST Invoice — Complete Guide 2025 | InvoiceKit</title>
+<meta name="description" content="Step-by-step guide to creating a GST invoice in India. Learn mandatory fields, GSTIN format, invoice numbering rules, HSN/SAC codes, GST calculation and free template.">
+<meta name="keywords" content="how to create gst invoice, gst invoice format, gst invoice mandatory fields, gst invoice example, gst bill format, how to make gst invoice, gst invoice india, gst invoice template free">
+<link rel="canonical" href="https://nxtcraft.github.io/invoicekit/gst-invoice-guide/">
+<meta property="og:title" content="How to Create a GST Invoice — Complete Guide 2025">
+<meta property="og:description" content="Step-by-step: mandatory fields, GSTIN, HSN codes, GST calculation, invoice numbering. Free GST invoice generator included.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are the mandatory fields in a GST invoice?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A GST invoice must include: (1) Supplier's name, address, and GSTIN, (2) Unique invoice number, (3) Date of issue, (4) Recipient's name, address, and GSTIN (for registered buyers), (5) Description of goods or services, (6) HSN or SAC code, (7) Quantity and unit, (8) Total value, (9) Taxable value after discounts, (10) GST rate (CGST+SGST or IGST), (11) Tax amount charged, (12) Place of supply." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between CGST, SGST and IGST?",
+      "acceptedAnswer": { "@type": "Answer", "text": "CGST (Central GST) and SGST (State GST) are charged on intra-state transactions — when buyer and seller are in the same state. Each is half of the total GST rate. IGST (Integrated GST) is charged on inter-state transactions — when buyer and seller are in different states. IGST equals the full GST rate. Example: 18% GST on an intra-state sale = 9% CGST + 9% SGST. Same item sold across state lines = 18% IGST." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is an invoice number mandatory for GST?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. A consecutive serial number is mandatory for every GST invoice. The number can contain letters, numbers, or special characters like hyphens. It must be unique for each financial year and can be reset at the start of a new financial year (April 1). Example formats: INV-001, 2025-001, TXN/2025/001." }
+    },
+    {
+      "@type": "Question",
+      "name": "When must a GST invoice be issued?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For goods: invoice must be issued at or before delivery (or dispatch if earlier). For services: within 30 days of service completion. For banking and insurance companies: within 45 days. Delayed invoices can attract penalties under GST law." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is GST invoice required below ₹200?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. A registered business is not required to issue a GST invoice for transactions below ₹200 to unregistered buyers, provided the buyer does not require an invoice. However, a consolidated invoice for all such transactions in a day must be issued." }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Create a GST Invoice",
+  "description": "Step-by-step process to create a legally valid GST invoice in India",
+  "totalTime": "PT5M",
+  "step": [
+    { "@type": "HowToStep", "name": "Add seller details", "text": "Enter your business name, address, state and GSTIN (15-digit GST Identification Number)." },
+    { "@type": "HowToStep", "name": "Add buyer details", "text": "Enter the buyer's name, address, state and GSTIN (if registered). For B2C sales, GSTIN is optional." },
+    { "@type": "HowToStep", "name": "Set invoice number and date", "text": "Enter a unique consecutive invoice number and the date of issue." },
+    { "@type": "HowToStep", "name": "Add line items", "text": "For each product or service: description, HSN/SAC code, quantity, unit, rate and applicable GST rate." },
+    { "@type": "HowToStep", "name": "Calculate GST", "text": "For intra-state: split GST equally as CGST + SGST. For inter-state: charge IGST at the full rate." },
+    { "@type": "HowToStep", "name": "Add total and notes", "text": "Sum up taxable value, CGST, SGST/IGST and total invoice value. Add payment terms or bank details if needed." },
+    { "@type": "HowToStep", "name": "Download or print", "text": "Save as PDF and send to the buyer. Keep a copy for your records and GST return filing." }
+  ]
+}
+</script>
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.guide-hero { background: linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%); color:#fff; padding:40px 24px; text-align:center; }
+.guide-hero h1 { font-size:26px; font-weight:800; margin-bottom:10px; }
+.guide-hero p { font-size:15px; opacity:.9; max-width:600px; margin:0 auto 18px; }
+.guide-hero a.cta { display:inline-block; background:#fff; color:#4f46e5; font-weight:800; padding:10px 24px; border-radius:10px; text-decoration:none; font-size:14px; }
+.guide-body { max-width:780px; margin:0 auto; padding:32px 20px; }
+.guide-body h2 { font-size:20px; font-weight:800; color:#1e1b4b; margin:32px 0 10px; }
+.guide-body h3 { font-size:16px; font-weight:700; color:#312e81; margin:22px 0 8px; }
+.guide-body p { color:#374151; margin-bottom:12px; line-height:1.7; }
+.guide-body ul, .guide-body ol { padding-left:20px; color:#374151; margin-bottom:12px; }
+.guide-body li { margin-bottom:6px; line-height:1.7; }
+.step-card { background:#f5f3ff; border:1.5px solid #c4b5fd; border-radius:12px; padding:16px 18px; margin:10px 0; display:flex; gap:14px; align-items:flex-start; }
+.step-num { background:#4f46e5; color:#fff; font-weight:800; font-size:14px; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+.step-text strong { display:block; font-size:14px; color:#1e1b4b; margin-bottom:3px; }
+.step-text span { font-size:13px; color:#5b21b6; }
+.invoice-sample { background:#fff; border:1.5px solid #e2e8f0; border-radius:12px; padding:24px; margin:20px 0; font-size:13px; }
+.invoice-sample .inv-header { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px; padding-bottom:14px; border-bottom:2px solid #4f46e5; }
+.invoice-sample .inv-title { font-size:22px; font-weight:900; color:#4f46e5; }
+.invoice-sample .inv-meta { font-size:12px; color:#64748b; }
+.invoice-sample .inv-parties { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.invoice-sample .party-block { background:#f8fafc; border-radius:8px; padding:12px; }
+.invoice-sample .party-label { font-size:10px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+.invoice-sample table { width:100%; border-collapse:collapse; margin-bottom:12px; }
+.invoice-sample th { background:#f1f5f9; font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:#64748b; padding:7px 10px; text-align:left; }
+.invoice-sample td { padding:8px 10px; border-bottom:1px solid #f1f5f9; color:#374151; }
+.invoice-sample .totals { text-align:right; }
+.invoice-sample .totals tr td:first-child { color:#64748b; }
+.invoice-sample .totals tr.grand-total td { font-weight:800; color:#1e1b4b; font-size:15px; border-top:2px solid #e2e8f0; }
+.faq-item { border:1px solid #e2e8f0; border-radius:10px; margin-bottom:8px; overflow:hidden; }
+.faq-item summary { padding:14px 16px; font-weight:700; cursor:pointer; color:#1e1b4b; font-size:14px; }
+.faq-item p { padding:0 16px 14px; color:#374151; font-size:13px; line-height:1.7; }
+.field-table { width:100%; border-collapse:collapse; margin:12px 0; }
+.field-table th { background:#4f46e5; color:#fff; font-size:12px; padding:8px 12px; text-align:left; }
+.field-table td { padding:9px 12px; border-bottom:1px solid #e2e8f0; font-size:13px; color:#374151; }
+.field-table tr:nth-child(even) td { background:#f8fafc; }
+.req-badge { background:#dcfce7; color:#166534; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px; }
+.opt-badge { background:#fef9c3; color:#854d0e; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px; }
+.cta-box { background:linear-gradient(135deg,#4f46e5,#7c3aed); border-radius:14px; padding:24px; text-align:center; color:#fff; margin:32px 0; }
+.cta-box h3 { font-size:18px; margin-bottom:8px; }
+.cta-box p { font-size:13px; opacity:.9; margin-bottom:14px; }
+.cta-box a { background:#fff; color:#4f46e5; font-weight:800; padding:10px 28px; border-radius:10px; text-decoration:none; font-size:14px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div style="display:flex; align-items:center; justify-content:space-between; max-width:1100px; margin:0 auto; padding:0 20px; height:52px;">
+    <a href="../" style="font-weight:800; color:#4f46e5; text-decoration:none; font-size:16px;">Invoice<span style="color:#0f172a;">Kit</span></a>
+    <a href="../" style="font-size:13px; color:#4f46e5; text-decoration:none; font-weight:600;">← Create Invoice Free</a>
+  </div>
+</nav>
+
+<div class="guide-hero">
+  <h1>How to Create a GST Invoice in India</h1>
+  <p>Complete guide with mandatory fields, format rules, CGST/SGST/IGST calculation and a free template — updated for 2025.</p>
+  <a href="../" class="cta">Create GST Invoice Free →</a>
+</div>
+
+<div class="guide-body">
+
+  <p>A GST invoice is a tax document issued by a GST-registered business for every taxable supply of goods or services. It serves as legal proof of the transaction, enables the buyer to claim Input Tax Credit (ITC), and is the basis for your GST return filing. Getting it right matters — missing mandatory fields can lead to ITC rejection for your buyer and penalties for you.</p>
+
+  <h2>7 Steps to Create a GST Invoice</h2>
+
+  <div class="step-card">
+    <div class="step-num">1</div>
+    <div class="step-text">
+      <strong>Add your business (seller) details</strong>
+      <span>Name, full address, state and your 15-digit GSTIN. The GSTIN must be valid and match your registered state.</span>
+    </div>
+  </div>
+  <div class="step-card">
+    <div class="step-num">2</div>
+    <div class="step-text">
+      <strong>Add buyer details</strong>
+      <span>Name, address and state. For B2B sales, add buyer's GSTIN — this is mandatory for ITC eligibility. For B2C sales to end consumers, GSTIN is optional.</span>
+    </div>
+  </div>
+  <div class="step-card">
+    <div class="step-num">3</div>
+    <div class="step-text">
+      <strong>Set invoice number and date</strong>
+      <span>A unique, consecutive serial number per financial year. Format examples: INV-001, 2025-001, SHOP/25-26/001. Date must be the date of supply or earlier.</span>
+    </div>
+  </div>
+  <div class="step-card">
+    <div class="step-num">4</div>
+    <div class="step-text">
+      <strong>List products or services with HSN/SAC codes</strong>
+      <span>HSN (Harmonised System of Nomenclature) for goods, SAC (Services Accounting Code) for services. 4-digit codes for turnover ₹1.5–5 Cr, 6-digit for above ₹5 Cr, optional below ₹1.5 Cr.</span>
+    </div>
+  </div>
+  <div class="step-card">
+    <div class="step-num">5</div>
+    <div class="step-text">
+      <strong>Apply the correct GST rate</strong>
+      <span>Common rates: 0%, 5%, 12%, 18%, 28%. Check the GST rate for your goods/services on the GST Council rate schedule.</span>
+    </div>
+  </div>
+  <div class="step-card">
+    <div class="step-num">6</div>
+    <div class="step-text">
+      <strong>Split as CGST+SGST or charge IGST</strong>
+      <span>Same state (intra-state): CGST = SGST = rate/2 each. Different state (inter-state): IGST = full rate. Determine by comparing seller's state with place of supply.</span>
+    </div>
+  </div>
+  <div class="step-card">
+    <div class="step-num">7</div>
+    <div class="step-text">
+      <strong>Total, sign and send as PDF</strong>
+      <span>Add up taxable value + tax amounts = invoice total. Download as PDF and send to buyer. Retain a copy for GSTR-1 filing.</span>
+    </div>
+  </div>
+
+  <h2>Mandatory Fields — GST Invoice Checklist</h2>
+  <table class="field-table">
+    <thead><tr><th>Field</th><th>Required?</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>Supplier name & address</td><td><span class="req-badge">Required</span></td><td>Full legal name as registered under GST</td></tr>
+      <tr><td>Supplier GSTIN</td><td><span class="req-badge">Required</span></td><td>15-character GSTIN of the seller</td></tr>
+      <tr><td>Invoice number</td><td><span class="req-badge">Required</span></td><td>Consecutive, unique per financial year</td></tr>
+      <tr><td>Invoice date</td><td><span class="req-badge">Required</span></td><td>Date of issue (must be ≤ date of supply)</td></tr>
+      <tr><td>Recipient name & address</td><td><span class="req-badge">Required</span></td><td>Buyer's details</td></tr>
+      <tr><td>Recipient GSTIN</td><td><span class="req-badge">B2B only</span></td><td>Mandatory for registered buyers (ITC claims)</td></tr>
+      <tr><td>Place of supply</td><td><span class="req-badge">Required</span></td><td>State name/code — determines IGST vs CGST+SGST</td></tr>
+      <tr><td>HSN / SAC code</td><td><span class="req-badge">Required</span></td><td>4-digit (turnover ₹1.5–5Cr) or 6-digit (>₹5Cr)</td></tr>
+      <tr><td>Description of goods/services</td><td><span class="req-badge">Required</span></td><td>Clear description of what was sold</td></tr>
+      <tr><td>Quantity & unit</td><td><span class="req-badge">Goods only</span></td><td>For services, quantity is optional</td></tr>
+      <tr><td>Total value</td><td><span class="req-badge">Required</span></td><td>Gross value before deductions</td></tr>
+      <tr><td>Discount (if any)</td><td><span class="opt-badge">If applicable</span></td><td>Post-supply discount reduces taxable value</td></tr>
+      <tr><td>Taxable value</td><td><span class="req-badge">Required</span></td><td>Value after discounts, on which GST is calculated</td></tr>
+      <tr><td>GST rate</td><td><span class="req-badge">Required</span></td><td>Rate applied per item (0/5/12/18/28%)</td></tr>
+      <tr><td>CGST + SGST or IGST amount</td><td><span class="req-badge">Required</span></td><td>Tax amount in ₹ for each component</td></tr>
+      <tr><td>Total invoice value</td><td><span class="req-badge">Required</span></td><td>Taxable value + all taxes</td></tr>
+      <tr><td>Digital/physical signature</td><td><span class="opt-badge">Optional</span></td><td>Not mandatory under GST law; useful for disputes</td></tr>
+    </tbody>
+  </table>
+
+  <h2>GST Invoice Sample</h2>
+  <div class="invoice-sample">
+    <div class="inv-header">
+      <div>
+        <div class="inv-title">TAX INVOICE</div>
+        <div class="inv-meta">Invoice No: INV-2025-001 &nbsp;|&nbsp; Date: 15 Nov 2025</div>
+      </div>
+      <div style="text-align:right; font-size:12px; color:#64748b;">
+        <div>Place of Supply: Maharashtra</div>
+        <div>Original / Buyer's Copy</div>
+      </div>
+    </div>
+    <div class="inv-parties">
+      <div class="party-block">
+        <div class="party-label">From (Seller)</div>
+        <strong style="font-size:13px;">Acme Supplies Pvt Ltd</strong><br>
+        <span style="color:#64748b; font-size:12px;">123, MIDC, Andheri East, Mumbai – 400093<br>GSTIN: 27AAAAA0000A1Z5</span>
+      </div>
+      <div class="party-block">
+        <div class="party-label">To (Buyer)</div>
+        <strong style="font-size:13px;">RetailMart Stores</strong><br>
+        <span style="color:#64748b; font-size:12px;">45, Linking Road, Bandra West, Mumbai – 400050<br>GSTIN: 27BBBBB1111B1Z3</span>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Description</th><th>HSN</th><th>Qty</th><th>Rate</th><th>Taxable Value</th><th>GST 18%</th><th>Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Office Chair – Ergonomic</td><td>9401</td><td>2</td><td>₹5,000</td><td>₹10,000</td><td>CGST ₹900<br>SGST ₹900</td><td>₹11,800</td></tr>
+        <tr><td>2</td><td>Writing Desk – Wooden</td><td>9403</td><td>1</td><td>₹8,000</td><td>₹8,000</td><td>CGST ₹720<br>SGST ₹720</td><td>₹9,440</td></tr>
+      </tbody>
+    </table>
+    <div class="totals">
+      <table style="width:260px; margin-left:auto;">
+        <tbody class="totals">
+          <tr><td>Subtotal</td><td>₹18,000</td></tr>
+          <tr><td>CGST (9%)</td><td>₹1,620</td></tr>
+          <tr><td>SGST (9%)</td><td>₹1,620</td></tr>
+          <tr class="grand-total"><td>Total</td><td>₹21,240</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:11px; color:#64748b; margin-top:12px; border-top:1px solid #f1f5f9; padding-top:10px;">
+      Amount in words: Rupees Twenty-One Thousand Two Hundred Forty Only<br>
+      Bank: HDFC Bank &nbsp;|&nbsp; A/C: 1234567890 &nbsp;|&nbsp; IFSC: HDFC0001234
+    </div>
+  </div>
+
+  <h2>CGST vs SGST vs IGST — How to Choose</h2>
+  <p>The split depends on the <strong>place of supply</strong> compared to the supplier's location:</p>
+  <ul>
+    <li><strong>Both in the same state</strong> → Intra-state supply → Charge CGST + SGST (half each)</li>
+    <li><strong>Different states</strong> → Inter-state supply → Charge IGST (full rate)</li>
+    <li><strong>Export or SEZ</strong> → Zero-rated supply → 0% IGST (with refund option)</li>
+  </ul>
+  <p><em>Example:</em> Selling a ₹10,000 service at 18% GST from Mumbai to a Delhi client: 18% IGST = ₹1,800. Same sale to a Mumbai client: 9% CGST + 9% SGST = ₹900 + ₹900 = ₹1,800 total.</p>
+
+  <h2>GST Invoice Numbering Rules</h2>
+  <ul>
+    <li>Must be a consecutive serial number</li>
+    <li>Can contain letters, numbers, hyphens and slashes</li>
+    <li>Maximum 16 characters</li>
+    <li>Must be unique for the financial year (April–March)</li>
+    <li>You can reset numbering on April 1 each year</li>
+    <li>Each series (e.g., regular and export) can have its own numbering</li>
+  </ul>
+
+  <h2>Invoice Timing Rules</h2>
+  <ul>
+    <li><strong>Goods:</strong> Before or at the time of delivery / dispatch</li>
+    <li><strong>Services:</strong> Within 30 days of service completion</li>
+    <li><strong>Banking / Insurance:</strong> Within 45 days</li>
+    <li><strong>Continuous supply:</strong> Before/on the due date for payment</li>
+  </ul>
+
+  <div class="cta-box">
+    <h3>Create Your GST Invoice Free</h3>
+    <p>InvoiceKit handles all the calculations — CGST, SGST, IGST, discounts. Fill in details and download PDF in seconds.</p>
+    <a href="../">Create Invoice Now →</a>
+  </div>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <details class="faq-item">
+    <summary>What are the mandatory fields in a GST invoice?</summary>
+    <p>Supplier name, address and GSTIN; invoice number and date; recipient details and GSTIN (for B2B); place of supply; HSN/SAC code; description, quantity and rate; taxable value; GST rate and amount (CGST+SGST or IGST); and total invoice value.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is the difference between CGST, SGST and IGST?</summary>
+    <p>CGST and SGST are charged on intra-state (within the same state) transactions — each at half the GST rate. IGST is charged on inter-state transactions at the full GST rate. Both result in the same total tax for the buyer, but the government distributes the revenue differently.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is an invoice number mandatory?</summary>
+    <p>Yes. A consecutive, unique serial number is mandatory on every GST invoice. It can include letters, numbers, hyphens and slashes (max 16 characters) and must be unique within the financial year.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Do I need to issue a GST invoice for every sale?</summary>
+    <p>For sales above ₹200 to unregistered buyers, yes. For sales below ₹200 to unregistered buyers, you can issue a consolidated invoice for all such transactions during a day. For registered buyers (B2B), always issue an invoice regardless of amount.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>What is an HSN code and where do I find it?</summary>
+    <p>HSN (Harmonised System of Nomenclature) is an international system for classifying goods. In India, businesses with annual turnover above ₹1.5 crore must mention HSN codes on invoices (4-digit for ₹1.5–5Cr, 6-digit for above ₹5Cr). You can find HSN codes on the GST portal (www.gst.gov.in) under the HSN Search tool.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Can I create a GST invoice without billing software?</summary>
+    <p>Yes. You can create a GST invoice in Excel, Word, or using a free online tool like InvoiceKit. The law doesn't require special software — it only requires that all mandatory fields are present and the invoice is retained for 6 years. Free tools are fine for small businesses and freelancers.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is a GST invoice the same as a tax invoice?</summary>
+    <p>Yes, under GST law the official document is called a "Tax Invoice." A GST invoice and tax invoice refer to the same document. Some states used to have separate VAT invoices before GST — those are now replaced by the unified GST tax invoice.</p>
+  </details>
+
+  <div style="margin-top:28px; padding-top:20px; border-top:1px solid #e2e8f0; text-align:center; font-size:12px; color:#64748b;">
+    Also useful: <a href="https://nxtcraft.github.io/shopbook/" style="color:#4f46e5;">ShopBook — Offline Billing for Shops</a> ·
+    <a href="https://nxtcraft.github.io/emicalc/" style="color:#4f46e5;">EMI Calculator</a> ·
+    <a href="https://nxtcraft.github.io/taxcalc/" style="color:#4f46e5;">TaxCalc — Income Tax</a>
+  </div>
+
+</div>
+
+<footer style="background:#0f172a; color:#94a3b8; text-align:center; padding:18px; font-size:12px; margin-top:0;">
+  &copy; 2026 InvoiceKit · <a href="https://nxtcraft.github.io/" style="color:#818cf8;">NxtCraft Tools</a>
+</footer>
+
+</body>
+</html>
