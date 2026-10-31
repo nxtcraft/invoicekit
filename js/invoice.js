@@ -32,7 +32,7 @@ function renderItems() {
 
 function updateItem(id, field, val) {
   const item = items.find(i => i.id === id);
-  if (item) { item[field] = val; calcTotals(); renderItemTotal(id); }
+  if (item) { item[field] = val; calcTotals(); renderItemTotal(id); autosave(); }
 }
 
 function renderItemTotal(id) {
@@ -56,7 +56,54 @@ function calcTotals() {
   document.getElementById('t_total').textContent = fmt(total);
 }
 
-function syncPreview() { /* live sync placeholder — preview built on open */ }
+function syncPreview() { autosave(); }
+
+// ── PERSISTENCE ──
+function autosave() {
+  try {
+    const d = {
+      biz: { name: v('biz_name'), email: v('biz_email'), phone: v('biz_phone'), gstin: v('biz_gstin'), address: v('biz_address') },
+      client: { name: v('client_name'), email: v('client_email'), address: v('client_address'), gstin: v('client_gstin') },
+      inv: { number: v('inv_number'), date: v('inv_date'), due: v('due_date') },
+      currency: v('currency'), tax_pct: v('tax_pct'), discount: v('discount'),
+      notes: v('notes'), items
+    };
+    localStorage.setItem('ik_draft', JSON.stringify(d));
+    showSaved();
+  } catch(e) {}
+}
+
+function v(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+
+let _saveTimer;
+function showSaved() {
+  clearTimeout(_saveTimer);
+  const el = document.getElementById('ik-saved');
+  if (!el) return;
+  el.style.opacity = '1';
+  _saveTimer = setTimeout(() => { el.style.opacity = '0'; }, 2000);
+}
+
+function loadDraft() {
+  try {
+    const raw = localStorage.getItem('ik_draft');
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    const set = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined && val !== '') el.value = val; };
+    set('biz_name', d.biz?.name); set('biz_email', d.biz?.email);
+    set('biz_phone', d.biz?.phone); set('biz_gstin', d.biz?.gstin); set('biz_address', d.biz?.address);
+    set('client_name', d.client?.name); set('client_email', d.client?.email);
+    set('client_address', d.client?.address); set('client_gstin', d.client?.gstin);
+    set('inv_number', d.inv?.number); set('inv_date', d.inv?.date); set('due_date', d.inv?.due);
+    set('currency', d.currency); set('tax_pct', d.tax_pct); set('discount', d.discount);
+    set('notes', d.notes);
+    if (d.items?.length) {
+      items = [];
+      d.items.forEach(i => addItem(i.desc, i.qty, i.rate));
+    }
+    calcTotals();
+  } catch(e) {}
+}
 
 function getData() {
   const cur = getCur();
@@ -281,6 +328,7 @@ function downloadPDF() {
 
 function clearAll() {
   if (!confirm('Clear all fields and start fresh?')) return;
+  localStorage.removeItem('ik_draft');
   ['biz_name','biz_email','biz_phone','biz_gstin','biz_address','client_name','client_email','client_address','client_gstin','notes'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('inv_number').value = 'INV-001';
   document.getElementById('inv_date').value = new Date().toISOString().slice(0,10);

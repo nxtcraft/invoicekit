@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-XXXXXXXXXX");</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>InvoiceKit — Free Online Invoice Generator | Create & Download PDF Invoice</title>
@@ -26,6 +29,7 @@
 
 <nav>
   <a class="nav-logo" href="index.html">Invoice<span>Kit</span></a>
+  <span id="ik-saved" style="font-size:11px;color:#22c55e;margin-left:12px;opacity:0;transition:opacity .4s;font-weight:600;">✓ Draft saved</span>
   <a href="gst-invoice-guide/" style="font-size:13px; color:#4f46e5; text-decoration:none; font-weight:600; margin-left:auto;">GST Invoice Guide →</a>
   <a href="guide/" style="font-size:12px; color:#6b7280; text-decoration:none; margin-left:12px;">📖 How to use</a>
 </nav>
@@ -134,12 +138,17 @@
 
 <script src="js/invoice.js"></script>
 <script>
-  // Set today's date on load
-  document.getElementById('inv_date').value = new Date().toISOString().slice(0,10);
-  const due = new Date(); due.setDate(due.getDate() + 30);
-  document.getElementById('due_date').value = due.toISOString().slice(0,10);
-  document.getElementById('inv_number').value = 'INV-001';
-  addItem(); addItem();
+  // Restore draft or set defaults
+  const _hasDraft = localStorage.getItem('ik_draft');
+  if (_hasDraft) {
+    loadDraft();
+  } else {
+    document.getElementById('inv_date').value = new Date().toISOString().slice(0,10);
+    const due = new Date(); due.setDate(due.getDate() + 30);
+    document.getElementById('due_date').value = due.toISOString().slice(0,10);
+    document.getElementById('inv_number').value = 'INV-001';
+    addItem(); addItem();
+  }
 </script>
 </body>
 </html>
