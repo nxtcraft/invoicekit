@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Create a GST Invoice — Step by Step Guide | InvoiceKit</title>
+<meta name="description" content="Step-by-step guide to creating a GST invoice with filled examples. See exactly how to fill each field and download as PDF free.">
+<meta name="keywords" content="how to create GST invoice, GST invoice kaise banaye, GST invoice format filled example, invoice generator guide, GST bill kaise banaye, GST invoice online free, invoice format with example India">
+<link rel="canonical" href="https://nxtcraft.github.io/invoicekit/guide/">
+<meta property="og:title" content="How to Create a GST Invoice — Step by Step Guide">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Create a GST Invoice Using InvoiceKit",
+  "description": "Step-by-step guide to creating a professional GST invoice with InvoiceKit",
+  "totalTime": "PT5M",
+  "step": [
+    { "@type": "HowToStep", "name": "Fill seller details", "text": "Enter your business name, address, GSTIN, and contact number." },
+    { "@type": "HowToStep", "name": "Fill buyer/client details", "text": "Enter the client's name, address, GSTIN (if registered), and email." },
+    { "@type": "HowToStep", "name": "Add invoice number and date", "text": "Enter the invoice number (e.g. INV-2026-042) and the invoice date." },
+    { "@type": "HowToStep", "name": "Add line items", "text": "Add each product or service with its quantity, rate, and GST rate (5%, 12%, 18%, or 28%)." },
+    { "@type": "HowToStep", "name": "Download as PDF", "text": "Click Download PDF. Save as PDF from the browser print dialog." }
+  ]
+}
+</script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: #fffbf0; color: #1a1a2e; }
+.site-header { background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%); color: white; padding: 14px 24px; }
+.logo { font-size: 20px; font-weight: 800; }
+.logo a { color: white; text-decoration: none; }
+.logo span { opacity: .7; }
+.container { max-width: 820px; margin: 0 auto; padding: 32px 20px 60px; }
+.breadcrumb { font-size: 12px; color: #f59e0b; margin-bottom: 20px; }
+.breadcrumb a { color: #f59e0b; text-decoration: none; }
+h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+.subtitle { font-size: 14px; color: #555; margin-bottom: 32px; line-height: 1.6; }
+.step-card { background: white; border-radius: 14px; padding: 22px 24px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(180,83,9,.08); border-left: 4px solid #f59e0b; }
+.step-num { font-size: 11px; font-weight: 700; color: #f59e0b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.step-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.step-body { font-size: 14px; color: #333; line-height: 1.7; }
+.example-box { background: #fffbeb; border-radius: 10px; padding: 14px 16px; margin-top: 12px; font-size: 13px; }
+.example-box strong { color: #b45309; display: block; margin-bottom: 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+.example-row { display: flex; gap: 12px; margin-bottom: 4px; }
+.ex-label { color: #555; min-width: 150px; flex-shrink: 0; }
+.ex-val { color: #1a1a2e; font-weight: 600; }
+.invoice-mock { background: white; border: 1.5px solid #fde68a; border-radius: 8px; padding: 16px; margin-top: 12px; font-size: 12px; }
+.inv-header { display: flex; justify-content: space-between; margin-bottom: 12px; }
+.inv-title { font-size: 18px; font-weight: 800; color: #b45309; }
+.inv-section { margin-bottom: 10px; }
+.inv-section-title { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; color: #888; margin-bottom: 4px; }
+.inv-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+.inv-table th { background: #fef3c7; padding: 5px 8px; text-align: left; font-size: 11px; }
+.inv-table td { padding: 5px 8px; border-bottom: 1px solid #fef9c3; }
+.inv-total { text-align: right; font-weight: 700; font-size: 14px; padding-top: 8px; border-top: 2px solid #f59e0b; }
+.tip-box { background: #fef3c7; border-left: 3px solid #f59e0b; border-radius: 8px; padding: 12px 14px; margin-top: 12px; font-size: 13px; color: #92400e; line-height: 1.6; }
+.cta-box { background: linear-gradient(135deg,#b45309,#f59e0b); color: white; border-radius: 16px; padding: 28px 32px; text-align: center; margin: 36px 0; }
+.cta-box h2 { font-size: 20px; margin-bottom: 8px; }
+.cta-box p { font-size: 13px; opacity: .85; margin-bottom: 16px; }
+.cta-btn { display: inline-block; background: white; color: #b45309; padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; }
+h2 { font-size: 20px; font-weight: 700; margin: 36px 0 16px; }
+details { border: 1px solid #fde68a; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+details summary { padding: 13px 16px; cursor: pointer; font-weight: 600; font-size: 14px; }
+details p { padding: 0 16px 14px; font-size: 13px; color: #555; line-height: 1.7; }
+footer { text-align: center; padding: 20px; font-size: 12px; color: #f59e0b; border-top: 1px solid #fde68a; margin-top: 40px; }
+</style>
+</head>
+<body>
+<div class="site-header">
+  <div class="logo"><a href="../">Invoice<span>Kit</span></a></div>
+</div>
+
+<div class="container">
+  <div class="breadcrumb"><a href="../">InvoiceKit</a> › How to Use</div>
+  <h1>How to Create a GST Invoice</h1>
+  <p class="subtitle">A step-by-step guide with filled examples. Create a professional GST invoice with auto-calculated tax in under 5 minutes. Download as PDF for free.</p>
+
+  <div class="step-card">
+    <div class="step-num">Step 1</div>
+    <div class="step-title">Fill your business (seller) details</div>
+    <div class="step-body">
+      <div class="example-box">
+        <strong>Example — freelance web developer</strong>
+        <div class="example-row"><span class="ex-label">Business Name</span><span class="ex-val">TechByte Solutions</span></div>
+        <div class="example-row"><span class="ex-label">Address</span><span class="ex-val">402, Shree Complex, MG Road, Pune, MH 411001</span></div>
+        <div class="example-row"><span class="ex-label">GSTIN</span><span class="ex-val">27AABCT5432R1ZA</span></div>
+        <div class="example-row"><span class="ex-label">Phone</span><span class="ex-val">+91 92678 45123</span></div>
+        <div class="example-row"><span class="ex-label">Email</span><span class="ex-val">billing@techbytesolutions.in</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">Step 2</div>
+    <div class="step-title">Fill client (buyer) details</div>
+    <div class="step-body">
+      <div class="example-box">
+        <strong>Example — client details</strong>
+        <div class="example-row"><span class="ex-label">Client Name</span><span class="ex-val">Zara Fashion Pvt. Ltd.</span></div>
+        <div class="example-row"><span class="ex-label">Address</span><span class="ex-val">18, Brigade Road, Bengaluru, KA 560001</span></div>
+        <div class="example-row"><span class="ex-label">Client GSTIN</span><span class="ex-val">29AABCZ7654E1Z2</span></div>
+        <div class="example-row"><span class="ex-label">Client Email</span><span class="ex-val">accounts@zarafashion.in</span></div>
+      </div>
+      <div class="tip-box">💡 If your client is not GST-registered (e.g. an individual), leave their GSTIN blank. The invoice is still valid. Only add the client GSTIN when billing a registered business.</div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">Step 3</div>
+    <div class="step-title">Set invoice number and date</div>
+    <div class="step-body">
+      <div class="example-box">
+        <strong>Example</strong>
+        <div class="example-row"><span class="ex-label">Invoice Number</span><span class="ex-val">INV-2026-042</span></div>
+        <div class="example-row"><span class="ex-label">Invoice Date</span><span class="ex-val">31 October 2026</span></div>
+        <div class="example-row"><span class="ex-label">Due Date</span><span class="ex-val">15 November 2026</span></div>
+      </div>
+      <div class="tip-box">💡 Maintain a sequential invoice numbering system (INV-2026-001, INV-2026-002…). GST law requires consecutive invoice numbers within a financial year. Gaps in sequence can trigger scrutiny during audits.</div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">Step 4</div>
+    <div class="step-title">Add line items with GST</div>
+    <div class="step-body">
+      Add each product or service. Select the correct GST rate for each item.
+      <div class="example-box">
+        <strong>Example — services invoice for a web project</strong>
+        <table class="inv-table">
+          <tr><th>Description</th><th>Qty</th><th>Rate</th><th>GST</th><th>Amount</th></tr>
+          <tr><td>Website Design (5 pages)</td><td>1</td><td>₹25,000</td><td>18%</td><td>₹25,000</td></tr>
+          <tr><td>React Frontend Dev (40 hrs)</td><td>40</td><td>₹800</td><td>18%</td><td>₹32,000</td></tr>
+          <tr><td>Monthly Maintenance</td><td>3</td><td>₹3,000</td><td>18%</td><td>₹9,000</td></tr>
+        </table>
+        <div style="line-height:1.8; margin-top:8px;">
+          <div>Subtotal: <strong>₹66,000</strong></div>
+          <div>CGST 9%: <strong>₹5,940</strong></div>
+          <div>SGST 9%: <strong>₹5,940</strong></div>
+          <div style="font-size:15px; font-weight:700; color:#b45309;">Total: ₹77,880</div>
+        </div>
+      </div>
+      <div class="tip-box">💡 <strong>CGST + SGST vs IGST:</strong> If you and your client are in the same state, GST splits into CGST + SGST (9% + 9% for 18% rate). If your client is in a different state, it's IGST at the full rate (18%). InvoiceKit calculates this automatically based on your states.</div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-num">Step 5</div>
+    <div class="step-title">Download as PDF</div>
+    <div class="step-body">
+      Click <strong>Download PDF</strong>. In the print dialog, select <strong>Save as PDF</strong> and A4 paper size. The invoice will include all your details, line items, GST breakup, and total.
+      <div class="tip-box">💡 Email the PDF to your client with a subject like "Invoice INV-2026-042 from TechByte Solutions". Keep a copy in a folder sorted by year for easy filing at tax time.</div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h2>Create your GST invoice now</h2>
+    <p>Free · Professional · Instant PDF download</p>
+    <a href="../" class="cta-btn">Open InvoiceKit →</a>
+  </div>
+
+  <h2>Frequently Asked Questions</h2>
+  <details><summary>Which GST rate applies to my services?</summary><p>Most professional services (IT, consulting, freelance work, design) are taxed at 18% GST. Educational services: 0%. Restaurant food: 5%. Software products: 18%. Always verify the HSN/SAC code for your specific service at the GST portal. When in doubt, consult a CA.</p></details>
+  <details><summary>Do I need a GSTIN to create an invoice?</summary><p>If your annual turnover is below ₹20 lakhs (₹10 lakhs in some states), GST registration is not mandatory and you can issue invoices without GSTIN. Above that threshold, registration is mandatory. InvoiceKit works whether or not you have a GSTIN.</p></details>
+  <details><summary>Can I edit an invoice after downloading it?</summary><p>InvoiceKit generates a PDF which is not easily editable. To revise an invoice, go back to InvoiceKit, change the details, and download a new PDF. If you issued a wrong invoice to a GST-registered client, you may need to issue a Credit Note — check with your CA for GST compliance.</p></details>
+
+  <div style="margin-top:28px; font-size:12px; color:#f59e0b;">
+    Also try: <a href="https://nxtcraft.github.io/shopbook/" style="color:#f59e0b;">ShopBook — Quick Shop Billing</a> ·
+    <a href="https://nxtcraft.github.io/" style="color:#f59e0b;">All NxtCraft Tools</a>
+  </div>
+</div>
+
+<footer>&copy; 2026 InvoiceKit · <a href="https://nxtcraft.github.io/" style="color:#f59e0b;">NxtCraft Tools</a></footer>
+</body>
+</html>
