@@ -1,0 +1,17 @@
+{
+  "name": "InvoiceLab",
+  "short_name": "InvoiceLab",
+  "description": "Free Invoice Generator India GST",
+  "start_url": "https://nxtcraft.github.io/invoicelab/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#38bdf8",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='#38bdf8'/><text y='.9em' font-size='80' text-anchor='middle' x='50'>🧾</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

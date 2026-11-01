@@ -5,6 +5,9 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R9EW10BJGW"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-R9EW10BJGW");</script>
   <meta charset="UTF-8">
+<link rel="manifest" href="/invoicekit/manifest.json">
+<meta name="theme-color" content="#38bdf8">
+<meta name="mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>InvoiceLab — Free Online Invoice Generator | Create & Download PDF Invoice</title>
   <meta name="description" content="Free online invoice generator. Create professional invoices in seconds, add items, tax and notes, then download as PDF. No signup required. Works in your browser.">
@@ -159,5 +162,6 @@
     addItem(); addItem();
   }
 </script>
+<script>if("serviceWorker"in navigator)navigator.serviceWorker.register("/invoicekit/sw.js");</script>
 </body>
 </html>
